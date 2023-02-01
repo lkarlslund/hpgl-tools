@@ -17,7 +17,7 @@ So you'll need Inkscape and this repository in order to replicate this
 The optimizer takes an input file, and produces an output file. You can choose whether the optimizer is allowed to break consecutive lines apart, in order to optimize better, and also whether lines are allowed to be drawn in reverse. Both options are enabled default, as this is a pen plotter and it makes no difference to the output. If you're using this for a cutting plotter, you should probably disable both due to the knife offset coming into play.
 
 ```
-optimizer --input my-unoptimized-inkscape.hpgl --output awesome-optimized.hpgl [--reversible=true] [--breakandassemble=true]
+hpgl-optimizer --input my-unoptimized-inkscape.hpgl --output awesome-optimized.hpgl [--reversible=true] [--breakandassemble=true]
 ```
 
 ## SENDER
@@ -27,7 +27,7 @@ As I had a problem finding a simple utility that just sends a file over serial w
 To list available ports, just run it without options. To send a file:
 
 ```
-sender --input awesome-optimized.hpgl [-] --port COM5 [--baud 9600] [--stopbits 1] [--databits 8] [--parity N] [--dtr true] [--rts true] [--dsr true] [--cts true] [--maxchunk 16]
+hpgl-sender --input awesome-optimized.hpgl [-] --port COM5 [--baud 9600] [--stopbits 1] [--databits 8] [--parity N] [--dtr true] [--rts true] [--dsr true] [--cts true] [--maxchunk 16]
 ```
 
 DTS and RTS options set the bits on the sending side, and if DSR or CTS is true the program waits for them to be high before sending data, implementing hardware handshake. It sends up to 'maxchunk' bytes at a time, which defaults to 16 bytes.
